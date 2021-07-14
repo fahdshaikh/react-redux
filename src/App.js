@@ -15,6 +15,7 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(2),
     textAlign: "center",
     color: theme.palette.text.primary,
+    borderRadius: "0px",
   },
   boldText: {
     fontFamily: "Nunito,sans-serif",
@@ -30,7 +31,7 @@ function App() {
         <Grid container spacing={3}>
           <Grid item xs={12}>
             <Paper className={classes.paper}>
-              <Typography variant="h4" className={clsx([classes.boldText])}>
+              <Typography variant="h3" className={clsx([classes.boldText])}>
                 React - Redux
               </Typography>
             </Paper>

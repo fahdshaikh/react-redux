@@ -1,10 +1,12 @@
 import { createStore, combineReducers, applyMiddleware, compose } from "redux";
+import IncDecReducer from "./inc-dec/reducers";
 
 const rootReducer = combineReducers({
-  // sideNav: sideNavReducer,
+  incDec: IncDecReducer,
 });
 
 const logger = (store) => (next) => (action) => {
+  console.log(`action`, action);
   return next(action);
 };
 
