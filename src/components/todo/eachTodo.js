@@ -1,6 +1,6 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { Grid, IconButton } from "@material-ui/core";
+import { Grid, IconButton, Tooltip } from "@material-ui/core";
 import { delTodo, toggleTodo } from "../../redux/todo/actions";
 import { connect } from "react-redux";
 import clsx from "clsx";
@@ -52,9 +52,11 @@ const EachTodo = (props) => {
           </span>
         </Grid>
         <Grid item xs={1} md={2}>
-          <IconButton onClick={() => delTodo(id)}>
-            <span style={{ color: "#ff1744" }}>✘</span>
-          </IconButton>
+          <Tooltip title="dec 1 -- inc_dec_saga" placement="bottom">
+            <IconButton onClick={() => delTodo(id)}>
+              <span style={{ color: "#ff1744" }}>✘</span>
+            </IconButton>
+          </Tooltip>
         </Grid>
       </Grid>
     </div>

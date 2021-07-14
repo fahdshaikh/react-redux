@@ -7,6 +7,7 @@ import {
   Divider,
   TextField,
   InputAdornment,
+  Tooltip,
 } from "@material-ui/core";
 import { Edit as EditIcon } from "@material-ui/icons";
 import { addTodo, filterTodo } from "../../redux/todo/actions";
@@ -46,24 +47,6 @@ const Todo = (props) => {
   useEffect(() => {
     console.log(`allTodos`, allTodos);
   }, [allTodos]);
-
-  const handleFilterTodo = () => {
-    if (filter === "all") {
-      return allTodos;
-    }
-    if (filter === "done") {
-      let temp = allTodos.filter((item) => item.done);
-      return temp;
-    }
-    if (filter === "not done") {
-      let temp = allTodos.filter((item) => !item.done);
-      return temp;
-    }
-  };
-
-  useEffect(() => {
-    handleFilterTodo();
-  }, [filter]);
 
   return (
     <div className={classes.root}>
@@ -133,48 +116,67 @@ const Todo = (props) => {
             spacing={3}
           >
             <Grid item xs={4}>
-              <Button
-                fullWidth
-                variant="contained"
-                color={filter === "all" ? "primary" : "secondary"}
-                onClick={() => filterTodo("all")}
-                style={{ borderRadius: "0px" }}
-              >
-                <span className={clsx([classes.boldText])}>All</span>
-              </Button>
+              <Tooltip title="inc 1 -- inc_dec_saga" placement="top">
+                <Button
+                  fullWidth
+                  variant="contained"
+                  color={filter === "all" ? "primary" : "secondary"}
+                  onClick={() => filterTodo("all")}
+                  style={{ borderRadius: "0px" }}
+                >
+                  <span className={clsx([classes.boldText])}>All</span>
+                </Button>
+              </Tooltip>
             </Grid>
             <Grid item xs={4}>
-              <Button
-                fullWidth
-                variant="contained"
-                color={filter === "done" ? "primary" : "secondary"}
-                onClick={() => filterTodo("done")}
-                style={{ borderRadius: "0px" }}
-              >
-                <span className={clsx([classes.boldText])}>Done</span>
-              </Button>
+              <Tooltip title="inc 1 -- inc_dec_saga" placement="top">
+                <Button
+                  fullWidth
+                  variant="contained"
+                  color={filter === "done" ? "primary" : "secondary"}
+                  onClick={() => filterTodo("done")}
+                  style={{ borderRadius: "0px" }}
+                >
+                  <span className={clsx([classes.boldText])}>Done</span>
+                </Button>
+              </Tooltip>
             </Grid>
             <Grid item xs={4}>
-              <Button
-                fullWidth
-                variant="contained"
-                color={filter === "not done" ? "primary" : "secondary"}
-                onClick={() => filterTodo("not done")}
-                style={{ borderRadius: "0px" }}
-              >
-                <span className={clsx([classes.boldText])}>Not Done</span>
-              </Button>
+              <Tooltip title="inc 1 -- inc_dec_saga" placement="top">
+                <Button
+                  fullWidth
+                  variant="contained"
+                  color={filter === "not done" ? "primary" : "secondary"}
+                  onClick={() => filterTodo("not done")}
+                  style={{ borderRadius: "0px" }}
+                >
+                  <span className={clsx([classes.boldText])}>Not Done</span>
+                </Button>
+              </Tooltip>
             </Grid>
             {allTodos.length === 0 && (
               <Grid item xs={12}>
                 <span className={clsx([classes.noTodoText])}>Add a Todo..</span>
               </Grid>
             )}
-            {handleFilterTodo().map((todo) => (
-              <Grid item xs={12} key={todo.id}>
-                <EachTodo todo={todo} />
-              </Grid>
-            ))}
+            {allTodos
+              .filter((item) => {
+                if (filter === "all") {
+                  return item;
+                }
+                if (filter === "done" && item.done) {
+                  return item;
+                }
+                if (filter === "not done" && !item.done) {
+                  return item;
+                }
+              })
+              .reverse()
+              .map((todo) => (
+                <Grid item xs={12} key={todo.id}>
+                  <EachTodo todo={todo} />
+                </Grid>
+              ))}
           </Grid>
         </Grid>
       </Grid>
