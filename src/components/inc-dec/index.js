@@ -18,6 +18,10 @@ const useStyles = makeStyles(() => ({
     fontWeight: "800",
     textTransform: "capitalize",
   },
+  countDiv: {
+    backgroundColor: "#2979ff",
+    color: "#fff",
+  },
 }));
 
 function IncDec(props) {
@@ -43,6 +47,7 @@ function IncDec(props) {
             variant="contained"
             color="secondary"
             onClick={() => increment_5()}
+            style={{ borderRadius: "0px" }}
           >
             <span className={clsx([classes.boldText])}>Increment by 5</span>
           </Button>
@@ -52,12 +57,16 @@ function IncDec(props) {
             variant="contained"
             color="primary"
             onClick={() => increment_1()}
+            style={{ borderRadius: "0px" }}
           >
             <span className={clsx([classes.boldText])}>Increment by 1</span>
           </Button>
         </Grid>
         <Grid item>
-          <Typography variant="h3" className={clsx([classes.boldText])}>
+          <Typography
+            variant="h3"
+            className={clsx(classes.boldText, classes.countDiv)}
+          >
             <code>{count}</code>
           </Typography>
         </Grid>
@@ -66,6 +75,7 @@ function IncDec(props) {
             variant="contained"
             color="primary"
             onClick={() => decrement_1()}
+            style={{ borderRadius: "0px" }}
           >
             <span className={clsx([classes.boldText])}>Decrement by 1</span>
           </Button>
@@ -75,6 +85,7 @@ function IncDec(props) {
             variant="contained"
             color="secondary"
             onClick={() => decrement_5()}
+            style={{ borderRadius: "0px" }}
           >
             <span className={clsx([classes.boldText])}>Decrement by 5</span>
           </Button>

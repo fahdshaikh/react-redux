@@ -1,8 +1,10 @@
 import { createStore, combineReducers, applyMiddleware, compose } from "redux";
 import IncDecReducer from "./inc-dec/reducers";
+import TodoReducer from "./todo/reducers";
 
 const rootReducer = combineReducers({
   incDec: IncDecReducer,
+  todo: TodoReducer,
 });
 
 const logger = (store) => (next) => (action) => {

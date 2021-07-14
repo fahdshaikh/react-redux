@@ -8,8 +8,8 @@ import "./App.css";
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
-    maxWidth: "98%",
-    margin: "10px auto",
+    maxWidth: "97%",
+    margin: "20px auto",
   },
   paper: {
     padding: theme.spacing(2),
@@ -36,12 +36,12 @@ function App() {
               </Typography>
             </Paper>
           </Grid>
-          <Grid item xs={12} md={6}>
+          <Grid item xs={12} md={4}>
             <Paper className={classes.paper}>
               <IncDec />
             </Paper>
           </Grid>
-          <Grid item xs={12} md={6}>
+          <Grid item xs={12} md={8}>
             <Paper className={classes.paper}>
               <Todo />
             </Paper>
