@@ -1,4 +1,11 @@
-import { ADD_TODO, DEL_TODO, TOGGLE_TODO, FILTER_TODO } from "./types";
+import {
+  ADD_TODO,
+  DEL_TODO,
+  TOGGLE_TODO,
+  FILTER_TODO,
+  API_RES,
+  API_CALLED,
+} from "./types";
 import { v4 as uuidv4 } from "uuid";
 
 const INITIAL_STATE = {
@@ -20,6 +27,8 @@ const INITIAL_STATE = {
     },
   ],
   filter: "all",
+  res: {},
+  called: "",
 };
 
 const TodoReducer = (state = INITIAL_STATE, { type, payload }) => {
@@ -64,6 +73,18 @@ const TodoReducer = (state = INITIAL_STATE, { type, payload }) => {
       return {
         ...state,
         filter: payload.filter,
+      };
+
+    case API_RES:
+      return {
+        ...state,
+        res: payload.res,
+      };
+
+    case API_CALLED:
+      return {
+        ...state,
+        called: payload.called,
       };
 
     default:

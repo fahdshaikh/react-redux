@@ -18,6 +18,9 @@ const useStyles = makeStyles(() => ({
     fontWeight: "800",
     textTransform: "capitalize",
   },
+  title: {
+    fontSize: "2rem",
+  },
   countDiv: {
     backgroundColor: "#2979ff",
     color: "#fff",
@@ -31,20 +34,21 @@ function IncDec(props) {
     <div className={classes.root}>
       <Grid
         container
-        direction="column"
+        direction="row"
         justifyContent="center"
         alignItems="center"
         spacing={3}
       >
-        <Grid item>
-          <Typography variant="h3" className={clsx([classes.boldText])}>
+        <Grid item xs={12} md={2}>
+          <span className={clsx(classes.boldText, classes.title)}>
             <code> +/- Count: </code>
-          </Typography>
+          </span>
           <Divider />
         </Grid>
-        <Grid item>
+        <Grid item xs={12} md={2}>
           <Tooltip title="add todo -- todo_saga" placement="bottom">
             <Button
+              fullWidth
               variant="contained"
               color="secondary"
               onClick={() => increment_5()}
@@ -54,8 +58,9 @@ function IncDec(props) {
             </Button>
           </Tooltip>
         </Grid>
-        <Grid item>
+        <Grid item xs={12} md={2}>
           <Button
+            fullWidth
             variant="contained"
             color="primary"
             onClick={() => increment_1()}
@@ -72,8 +77,9 @@ function IncDec(props) {
             <code>{count}</code>
           </Typography>
         </Grid>
-        <Grid item>
+        <Grid item xs={12} md={2}>
           <Button
+            fullWidth
             variant="contained"
             color="primary"
             onClick={() => decrement_1()}
@@ -82,9 +88,10 @@ function IncDec(props) {
             <span className={clsx([classes.boldText])}>Decrement by 1</span>
           </Button>
         </Grid>
-        <Grid item>
+        <Grid item xs={12} md={2}>
           <Tooltip title="add todo -- todo_saga" placement="bottom">
             <Button
+              fullWidth
               variant="contained"
               color="secondary"
               onClick={() => decrement_5()}

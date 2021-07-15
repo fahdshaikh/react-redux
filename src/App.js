@@ -31,17 +31,17 @@ function App() {
         <Grid container spacing={3}>
           <Grid item xs={12}>
             <Paper className={classes.paper}>
-              <Typography variant="h3" className={clsx([classes.boldText])}>
+              <Typography variant="h4" className={clsx([classes.boldText])}>
                 React 🔥 Redux 🔥 Redux-Saga
               </Typography>
             </Paper>
           </Grid>
-          <Grid item xs={12} md={4}>
+          <Grid item xs={12}>
             <Paper className={classes.paper}>
               <IncDec />
             </Paper>
           </Grid>
-          <Grid item xs={12} md={8}>
+          <Grid item xs={12}>
             <Paper className={classes.paper}>
               <Todo />
             </Paper>

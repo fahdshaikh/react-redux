@@ -1,4 +1,11 @@
-import { ADD_TODO, DEL_TODO, TOGGLE_TODO, FILTER_TODO } from "./types";
+import {
+  ADD_TODO,
+  DEL_TODO,
+  TOGGLE_TODO,
+  FILTER_TODO,
+  API_RES,
+  API_CALLED,
+} from "./types";
 
 export const addTodo = (todo) => ({
   type: ADD_TODO,
@@ -25,5 +32,19 @@ export const filterTodo = (filter) => ({
   type: FILTER_TODO,
   payload: {
     filter,
+  },
+});
+
+export const apiRes = (res) => ({
+  type: API_RES,
+  payload: {
+    res,
+  },
+});
+
+export const apiCalled = (called) => ({
+  type: API_CALLED,
+  payload: {
+    called,
   },
 });

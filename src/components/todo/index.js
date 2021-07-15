@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import {
   Grid,
-  Typography,
   Button,
   Divider,
   TextField,
@@ -10,9 +9,10 @@ import {
   Tooltip,
 } from "@material-ui/core";
 import { Edit as EditIcon } from "@material-ui/icons";
-import { addTodo, filterTodo } from "../../redux/todo/actions";
+import { addTodo, filterTodo, apiCalled } from "../../redux/todo/actions";
 import { connect } from "react-redux";
 import EachTodo from "./eachTodo";
+import ReactJson from "react-json-view";
 import clsx from "clsx";
 
 const useStyles = makeStyles(() => ({
@@ -20,10 +20,13 @@ const useStyles = makeStyles(() => ({
     flexGrow: 1,
     maxWidth: "97%",
   },
+  title: {
+    fontSize: "2rem",
+  },
   boldText: {
     fontFamily: "Nunito,sans-serif",
     fontWeight: "800",
-    textTransform: "capitalize",
+    textTransform: "none",
   },
   textDiv: {
     textAlign: "left",
@@ -37,21 +40,60 @@ const useStyles = makeStyles(() => ({
     fontStyle: "italic",
     textTransform: "capitalize",
   },
+  responseDiv: {
+    padding: "10px",
+    textAlign: "left",
+    borderRadius: "0px",
+    border: "1px solid darkgray",
+    "& > *": {
+      backgroundColor: "#F7F7FC",
+    },
+    overflowX: "scroll",
+  },
+  statusBadge: {
+    maxWidth: "fit-content",
+    borderRadius: "5px",
+    color: "white",
+    fontSize: "1.3rem",
+    fontWeight: "bold",
+    padding: "0px",
+  },
+  success: {
+    // backgroundColor: "#33eb91",
+    backgroundColor: "#198754",
+    color: "white",
+    "&:hover": {
+      backgroundColor: "#33eb91",
+    },
+  },
+  failure: {
+    backgroundColor: "#dc3545",
+    color: "white",
+    "&:hover": {
+      backgroundColor: "#ff1744",
+    },
+  },
 }));
 
 const Todo = (props) => {
-  const { allTodos, addTodo, filter, filterTodo } = props;
+  const { allTodos, addTodo, filter, filterTodo, res, apiCalled } = props;
   const [todo, setTodo] = useState("");
+  const [successStatus, setSuccessStatus] = useState(false);
   const classes = useStyles();
 
   useEffect(() => {
-    console.log(`allTodos`, allTodos);
-  }, [allTodos]);
+    console.log(`res`, res);
+    if (res.status === 200 || res.status === 201) {
+      setSuccessStatus(true);
+    } else {
+      setSuccessStatus(false);
+    }
+  }, [res]);
 
   return (
     <div className={classes.root}>
       <Grid container spacing={3}>
-        <Grid item xs={12} md={6}>
+        <Grid item xs={12} md={4}>
           <Grid
             container
             direction="row"
@@ -60,9 +102,9 @@ const Todo = (props) => {
             spacing={3}
           >
             <Grid item xs={12}>
-              <Typography variant="h3" className={clsx([classes.boldText])}>
+              <span className={clsx(classes.boldText, classes.title)}>
                 <code> Todo: </code>
-              </Typography>
+              </span>
               <Divider />
             </Grid>
             <Grid item xs={12}>
@@ -100,13 +142,36 @@ const Todo = (props) => {
                   setTodo("");
                 }}
                 style={{ borderRadius: "0px" }}
+                className={clsx([classes.boldText])}
               >
-                <span className={clsx([classes.boldText])}>Add a Todo</span>
+                Add a Todo
+              </Button>
+            </Grid>
+            <Grid item xs={6} md={6}>
+              <Button
+                fullWidth
+                variant="contained"
+                className={clsx(classes.success, classes.boldText)}
+                onClick={() => apiCalled("then")}
+                style={{ borderRadius: "0px" }}
+              >
+                .then
+              </Button>
+            </Grid>
+            <Grid item xs={6} md={6}>
+              <Button
+                fullWidth
+                variant="contained"
+                className={clsx(classes.failure, classes.boldText)}
+                onClick={() => apiCalled("catch")}
+                style={{ borderRadius: "0px" }}
+              >
+                .catch
               </Button>
             </Grid>
           </Grid>
         </Grid>
-        <Grid item xs={12} md={6}>
+        <Grid item xs={12} md={4}>
           {" "}
           <Grid
             container
@@ -179,6 +244,44 @@ const Todo = (props) => {
               ))}
           </Grid>
         </Grid>
+        <Grid item xs={12} md={4}>
+          <Grid
+            container
+            direction="row"
+            justifyContent="center"
+            alignItems="flex-start"
+            spacing={3}
+          >
+            <Grid item xs={12} sm={5} md={12}>
+              <span className={clsx(classes.boldText, classes.title)}>
+                <code> Response:</code>
+                <Button
+                  size="small"
+                  variant="contained"
+                  color="primary"
+                  className={clsx(classes.statusBadge, {
+                    [classes.success]: successStatus,
+                    [classes.failure]: !successStatus,
+                    // (res?.status !== 200 || res?.status !== 201) ,
+                  })}
+                >
+                  <code>{res.status}</code>
+                </Button>
+              </span>
+              <Divider />
+            </Grid>
+            <Grid item xs={12} sm={7} md={12}>
+              <div className={classes.responseDiv}>
+                <ReactJson
+                  src={res}
+                  theme="summerfruit:inverted"
+                  collapsed="2"
+                  // collapseStringsAfterLength="3"
+                />
+              </div>
+            </Grid>
+          </Grid>
+        </Grid>
       </Grid>
     </div>
   );
@@ -188,6 +291,7 @@ const mapStateToProps = (state) => {
   return {
     allTodos: state.todo.allTodos,
     filter: state.todo.filter,
+    res: state.todo.res,
   };
 };
 
@@ -195,6 +299,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     addTodo: (todo) => dispatch(addTodo(todo)),
     filterTodo: (filter) => dispatch(filterTodo(filter)),
+    apiCalled: (called) => dispatch(apiCalled(called)),
   };
 };
 
