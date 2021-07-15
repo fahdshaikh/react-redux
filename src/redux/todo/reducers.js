@@ -5,17 +5,17 @@ const INITIAL_STATE = {
   allTodos: [
     {
       id: uuidv4(),
-      todo: "Exercise",
+      todo: "first todo",
       done: true,
     },
     {
       id: uuidv4(),
-      todo: "Do Breakfast",
+      todo: "second todo",
       done: true,
     },
     {
       id: uuidv4(),
-      todo: "Get to Work",
+      todo: "third todo",
       done: false,
     },
   ],
