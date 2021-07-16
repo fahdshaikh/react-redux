@@ -82,7 +82,6 @@ const Todo = (props) => {
   const classes = useStyles();
 
   useEffect(() => {
-    console.log(`res`, res);
     if (res.status === 200 || res.status === 201) {
       setSuccessStatus(true);
     } else {

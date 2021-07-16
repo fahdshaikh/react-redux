@@ -52,6 +52,6 @@ function* apiCalledFn(action) {
 export function* todo_saga() {
   yield takeEvery(FILTER_TODO, inc_1_TodoSaga);
   yield takeEvery(DEL_TODO, dec_1_TodoSaga);
-  yield takeEvery(ADD_TODO, postTodo);
-  yield takeEvery(API_CALLED, apiCalledFn);
+  yield takeEvery(ADD_TODO, postTodo); //
+  yield takeEvery(API_CALLED, apiCalledFn); //
 }

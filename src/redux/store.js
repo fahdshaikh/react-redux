@@ -1,4 +1,5 @@
 import { createStore, combineReducers, applyMiddleware, compose } from "redux";
+import logger from "redux-logger";
 import IncDecReducer from "./inc-dec/reducers";
 import TodoReducer from "./todo/reducers";
 
@@ -12,12 +13,15 @@ const rootReducer = combineReducers({
   todo: TodoReducer,
 });
 
-const logger = (store) => (next) => (action) => {
-  console.log(`action`, action);
-  return next(action);
-};
+// const logger = (store) => (next) => (action) => {
+//   console.log(`action`, action);
+//   return next(action);
+// };
 
-//-----------------with thunk---------------------------------------------------------------
+// ▜▛ █▬█ ▙▟ ▛▟ 🅺---------------------------------------------------------------
+
+// ▀█▀ █░█ █░█ █▄░█ █▄▀
+// ░█░ █▀█ █▄█ █░▀█ █░█
 
 // const thunk =
 //   (args) =>
@@ -42,7 +46,8 @@ const logger = (store) => (next) => (action) => {
 
 // composeEnhancers(applyMiddleware(thunk(), logger))
 
-//-----------------with redux-saga-------------------------------------------------------
+// █▀█ █▀▀ █▀▄ █░█ ▀▄▀ ▄▄ █▀ ▄▀█ █▀▀ ▄▀█
+// █▀▄ ██▄ █▄▀ █▄█ █░█ ░░ ▄█ █▀█ █▄█ █▀█
 
 function* rootSaga() {
   yield all([inc_dec_saga(), todo_saga()]);
@@ -50,11 +55,11 @@ function* rootSaga() {
 
 const sagaMiddleware = createSagaMiddleware();
 
-// export const store = createStore(
-//   rootReducer,
-//   compose(applyMiddleware(sagaMiddleware(), logger))
-// );
+export const store = createStore(
+  rootReducer,
+  compose(applyMiddleware(sagaMiddleware, logger))
+);
 
-export const store = createStore(rootReducer, applyMiddleware(sagaMiddleware));
+// export const store = createStore(rootReducer, applyMiddleware(sagaMiddleware));
 
 sagaMiddleware.run(rootSaga);
