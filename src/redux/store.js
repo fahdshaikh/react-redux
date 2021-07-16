@@ -1,5 +1,6 @@
 import { createStore, combineReducers, applyMiddleware, compose } from "redux";
-import logger from "redux-logger";
+// import logger from "redux-logger";
+import { createLogger } from "redux-logger";
 import IncDecReducer from "./inc-dec/reducers";
 import TodoReducer from "./todo/reducers";
 
@@ -7,6 +8,10 @@ import createSagaMiddleware from "redux-saga";
 import { all } from "redux-saga/effects";
 import { inc_dec_saga } from "./inc-dec/saga";
 import { todo_saga } from "./todo/saga";
+
+const logger = createLogger({
+  collapsed: true,
+});
 
 const rootReducer = combineReducers({
   incDec: IncDecReducer,

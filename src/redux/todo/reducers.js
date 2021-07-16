@@ -5,6 +5,7 @@ import {
   FILTER_TODO,
   API_RES,
   API_CALLED,
+  PRE_FETCH,
 } from "./types";
 import { v4 as uuidv4 } from "uuid";
 
@@ -29,6 +30,7 @@ const INITIAL_STATE = {
   filter: "all",
   res: {},
   called: "",
+  prefetch: {},
 };
 
 const TodoReducer = (state = INITIAL_STATE, { type, payload }) => {
@@ -47,7 +49,6 @@ const TodoReducer = (state = INITIAL_STATE, { type, payload }) => {
       };
 
     case DEL_TODO:
-      // let temp = state.allTodos.filter((item) => item.id !== payload.id);
       return {
         ...state,
         allTodos: state.allTodos.filter((item) => item.id !== payload.id),
@@ -85,6 +86,12 @@ const TodoReducer = (state = INITIAL_STATE, { type, payload }) => {
       return {
         ...state,
         called: payload.called,
+      };
+
+    case PRE_FETCH:
+      return {
+        ...state,
+        prefetch: payload.prefetch,
       };
 
     default:

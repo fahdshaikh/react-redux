@@ -5,6 +5,7 @@ import {
   FILTER_TODO,
   API_RES,
   API_CALLED,
+  PRE_FETCH,
 } from "./types";
 
 export const addTodo = (todo) => ({
@@ -46,5 +47,12 @@ export const apiCalled = (called) => ({
   type: API_CALLED,
   payload: {
     called,
+  },
+});
+
+export const preFetch = (prefetch) => ({
+  type: PRE_FETCH,
+  payload: {
+    prefetch,
   },
 });
