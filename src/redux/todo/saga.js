@@ -3,6 +3,7 @@ import { increment_1, decrement_1 } from "../inc-dec/actions";
 import { apiRes, preFetch } from "./actions";
 import { ADD_TODO, DEL_TODO, FILTER_TODO, API_CALLED } from "./types";
 import todoApi from "../../services/todo/todoApi.js";
+import { maxTimeLimit, apiDelay } from "../../config";
 
 // const getTodo = (state) => state.todo; // to get all the data from todo state
 // const preTodoData = yield select(getTodo); eg. for 👆
@@ -61,7 +62,7 @@ function* preFetchFn_1(action) {
     });
     yield put(apiRes(user));
 
-    yield delay(2000);
+    yield delay(apiDelay);
     const preFetchData = yield call(todoApi.getTodo);
     yield put(
       preFetch({
@@ -74,7 +75,7 @@ function* preFetchFn_1(action) {
   }
 }
 
-const maxTimeLimit = 3000;
+// const maxTimeLimit = 3000;
 
 const isTimeExausted = (preFetchData) => {
   let now = new Date();
