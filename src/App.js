@@ -1,7 +1,9 @@
+import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Paper, Grid, Typography } from "@material-ui/core";
 import IncDec from "./components/inc-dec";
 import Todo from "./components/todo";
+import Badge from "./components/badge";
 import clsx from "clsx";
 import "./App.css";
 
@@ -25,6 +27,21 @@ const useStyles = makeStyles((theme) => ({
 
 function App() {
   const classes = useStyles();
+  const [currentURLHost, setCurrentURLHost] = useState("");
+
+  useEffect(() => {
+    let urlHost = window.location.hostname.split(".");
+    if (urlHost[0] === "localhost") {
+      setCurrentURLHost("Local Env");
+    } else if (urlHost[0] === "dev") {
+      setCurrentURLHost("Dev Env");
+    } else if (urlHost[0] === "qa") {
+      setCurrentURLHost("QA Env");
+    } else {
+      setCurrentURLHost("Prod");
+    }
+  }, []);
+
   return (
     <div className="App">
       <div className={classes.root}>
@@ -48,6 +65,9 @@ function App() {
           </Grid>
         </Grid>
       </div>
+      {currentURLHost !== "Prod" ? (
+        <Badge currentURLHost={currentURLHost} />
+      ) : null}
     </div>
   );
 }
