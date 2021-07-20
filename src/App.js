@@ -4,6 +4,9 @@ import { Paper, Grid, Typography } from "@material-ui/core";
 import IncDec from "./components/inc-dec";
 import Todo from "./components/todo";
 import Badge from "./components/badge";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { notificationSettings } from "./config.js";
 import clsx from "clsx";
 import "./App.css";
 
@@ -40,6 +43,11 @@ function App() {
     } else {
       setCurrentURLHost("Prod");
     }
+    toast.dark("🔥", notificationSettings);
+    console.log(
+      `🔥 ❯ ~ useEffect ~ notificationSettings`,
+      notificationSettings
+    );
   }, []);
 
   return (
@@ -68,6 +76,7 @@ function App() {
       {currentURLHost !== "Prod" ? (
         <Badge currentURLHost={currentURLHost} />
       ) : null}
+      <ToastContainer />
     </div>
   );
 }

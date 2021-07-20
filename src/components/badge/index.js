@@ -2,7 +2,6 @@ import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Paper, Typography, Button } from "@material-ui/core";
 import clsx from "clsx";
-import "./badge.css";
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -34,10 +33,11 @@ const Badge = ({ currentURLHost }) => {
   const classes = useStyles();
 
   return (
-    <Button className={clsx(classes.root, "badge")}>
+    <Button className={clsx(classes.root)}>
       <Paper className={classes.paper}>
         <Typography className={clsx([classes.boldText])}>
-          {/* ❯ Redux-Saga 🔥 */}❯ {currentURLHost}.{" "}
+          ❯ 🔥
+          {/* ❯ {currentURLHost}.{" "} */}
         </Typography>
       </Paper>
     </Button>
