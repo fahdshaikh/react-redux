@@ -2,6 +2,7 @@ import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Paper, Typography, Button } from "@material-ui/core";
 import clsx from "clsx";
+import "./badge.css";
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -18,7 +19,8 @@ const useStyles = makeStyles(() => ({
     textAlign: "left",
     borderRadius: "0px",
     color: "#fff",
-    backgroundColor: "#000",
+    backgroundColor: "RGBA(0, 0, 0, 0.9)",
+    // filter: " invert(95%) hue-rotate(190deg)",
   },
   boldText: {
     fontFamily: "Nunito,sans-serif",
@@ -32,7 +34,7 @@ const Badge = ({ currentURLHost }) => {
   const classes = useStyles();
 
   return (
-    <Button className={clsx(classes.root)}>
+    <Button className={clsx(classes.root, "badge")}>
       <Paper className={classes.paper}>
         <Typography className={clsx([classes.boldText])}>
           {/* ❯ Redux-Saga 🔥 */}❯ {currentURLHost}.{" "}
