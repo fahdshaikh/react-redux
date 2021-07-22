@@ -8,6 +8,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import clsx from "clsx";
 import "./App.css";
+import GitUser from "./components/gitUser";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -65,11 +66,16 @@ function App() {
               <Todo />
             </Paper>
           </Grid>
+          <Grid item xs={12}>
+            <Paper className={classes.paper}>
+              <GitUser />
+            </Paper>
+          </Grid>
         </Grid>
       </div>
-      {/* {currentURLHost !== "Prod" ? (
+      {currentURLHost !== "Prod" ? (
         <Badge currentURLHost={currentURLHost} />
-      ) : null} */}
+      ) : null}
       <ToastContainer />
     </div>
   );

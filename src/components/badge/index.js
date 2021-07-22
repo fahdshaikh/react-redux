@@ -36,8 +36,7 @@ const Badge = ({ currentURLHost }) => {
     <Button className={clsx(classes.root)}>
       <Paper className={classes.paper}>
         <Typography className={clsx([classes.boldText])}>
-          ❯ 🔥
-          {/* ❯ {currentURLHost}.{" "} */}
+          {/* ❯ 🔥  */}❯ {currentURLHost}.{" "}
         </Typography>
       </Paper>
     </Button>

@@ -14,7 +14,7 @@ const getFetchData = (state) => state.todo.prefetch;
 const delay = (ms) => new Promise((res) => setTimeout(res, ms));
 // yield delay(1000);
 
-function* inc_1_TodoSaga(action) {
+function* inc_1_TodoSaga() {
   yield put(increment_1());
 }
 

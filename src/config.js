@@ -2,7 +2,7 @@ export const maxTimeLimit = 3000;
 export const apiDelay = 2000;
 export const notificationSettings = {
   position: "top-right",
-  autoClose: 3000,
+  autoClose: 5000,
   hideProgressBar: true,
   closeOnClick: true,
   pauseOnHover: true,

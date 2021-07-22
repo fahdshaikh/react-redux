@@ -4,11 +4,13 @@ import { createLogger } from "redux-logger";
 import IncDecReducer from "./inc-dec/reducers";
 import TodoReducer from "./todo/reducers";
 import NotificationReducer from "./notifications/reducers";
+import GitUserReducer from "./gitUser/reducers";
 
 import createSagaMiddleware from "redux-saga";
 import { all } from "redux-saga/effects";
 import { inc_dec_saga } from "./inc-dec/saga";
 import { todo_saga } from "./todo/saga";
+import { gitUser_saga } from "./gitUser/saga";
 
 const logger = createLogger({
   collapsed: true,
@@ -18,6 +20,7 @@ const rootReducer = combineReducers({
   incDec: IncDecReducer,
   todo: TodoReducer,
   notification: NotificationReducer,
+  gitUser: GitUserReducer,
 });
 
 // const logger = (store) => (next) => (action) => {
@@ -57,7 +60,7 @@ const rootReducer = combineReducers({
 // █▀▄ ██▄ █▄▀ █▄█ █░█ ░░ ▄█ █▀█ █▄█ █▀█
 
 function* rootSaga() {
-  yield all([inc_dec_saga(), todo_saga()]);
+  yield all([inc_dec_saga(), todo_saga(), gitUser_saga()]);
 }
 
 const sagaMiddleware = createSagaMiddleware();
