@@ -4,6 +4,7 @@ import { apiRes, preFetch } from "./actions";
 import { ADD_TODO, DEL_TODO, FILTER_TODO, API_CALLED } from "./types";
 import todoApi from "../../services/todo/todoApi.js";
 import { maxTimeLimit, apiDelay } from "../../config";
+import { success, error } from "../notifications/actions";
 
 // const getTodo = (state) => state.todo; // to get all the data from todo state
 // const preTodoData = yield select(getTodo); eg. for 👆
@@ -60,10 +61,12 @@ function* preFetchFn_1(action) {
       title: action.payload.todo,
       completed: false,
     });
+    yield put(success("Data Fetched Successfully"));
     yield put(apiRes(user));
 
     yield delay(apiDelay);
     const preFetchData = yield call(todoApi.getTodo);
+    yield put(success("Data Pre-Fetched"));
     yield put(
       preFetch({
         timestamp: new Date(),
@@ -71,6 +74,7 @@ function* preFetchFn_1(action) {
       })
     );
   } catch (e) {
+    yield put(error("Error while fetching data"));
     yield put(apiRes({ error: "ERR_NAME_NOT_RESOLVED", status: 200 }));
   }
 }
@@ -96,7 +100,19 @@ function* preFetchFn_2(action) {
       yield put(preFetch({}));
     } else {
       const todo = yield call(todoApi.getTodo);
+      yield put(success("Data Fetched Successfully"));
       yield put(apiRes(todo));
+    }
+  } else {
+    try {
+      const user = yield call(todoApi.errorTodo, {
+        title: action.payload.todo,
+        completed: false,
+      });
+      yield put(apiRes(user));
+    } catch (e) {
+      yield put(apiRes({ error: "ERR_NAME_NOT_RESOLVED", status: 404 }));
+      yield put(error("Error while fetching data"));
     }
   }
 }

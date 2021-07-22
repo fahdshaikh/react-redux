@@ -3,6 +3,7 @@ import { createStore, combineReducers, applyMiddleware, compose } from "redux";
 import { createLogger } from "redux-logger";
 import IncDecReducer from "./inc-dec/reducers";
 import TodoReducer from "./todo/reducers";
+import NotificationReducer from "./notifications/reducers";
 
 import createSagaMiddleware from "redux-saga";
 import { all } from "redux-saga/effects";
@@ -16,6 +17,7 @@ const logger = createLogger({
 const rootReducer = combineReducers({
   incDec: IncDecReducer,
   todo: TodoReducer,
+  notification: NotificationReducer,
 });
 
 // const logger = (store) => (next) => (action) => {
