@@ -26,6 +26,7 @@ const useStyles = makeStyles(() => ({
     fontWeight: "800",
     fontStyle: "italic",
     textTransform: "none",
+    fontSize: "1.3rem",
   },
 }));
 
@@ -36,7 +37,8 @@ const Badge = ({ currentURLHost }) => {
     <Button className={clsx(classes.root)}>
       <Paper className={classes.paper}>
         <Typography className={clsx([classes.boldText])}>
-          {/* ❯ 🔥  */}❯ {currentURLHost}.{" "}
+          ❯ 🔥 😁 ✌ 😎
+          {/* ❯ {currentURLHost}.{" "} */}
         </Typography>
       </Paper>
     </Button>
